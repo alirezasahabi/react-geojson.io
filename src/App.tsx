@@ -1,5 +1,7 @@
+import Map from './ui/map';
+
 const App = () => {
-  return <div>App</div>;
+  return <Map />;
 };
 
 export default App;
