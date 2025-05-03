@@ -1,30 +1,4 @@
-interface Style {
-  title: string;
-  style:
-    | string
-    | {
-        name: string;
-        version: number;
-        glyphs: string;
-        sources: {
-          [key: string]: {
-            type: string;
-            tiles: string[];
-            tileSize: number;
-            attribution: string;
-          };
-        };
-        layers: Array<{
-          id: string;
-          type: string;
-          source: string;
-          minzoom: number;
-          maxzoom: number;
-        }>;
-      };
-}
-
-const styles: Style[] = [
+const styles: { title: string; style: any }[] = [
   {
     title: 'Standard',
     style: 'mapbox://styles/mapbox/standard'
