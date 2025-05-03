@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+.projection-switch button.active {
+  background: #34495e;
+  color: #fff;
+}
+
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
