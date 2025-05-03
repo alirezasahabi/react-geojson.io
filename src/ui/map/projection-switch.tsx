@@ -1,9 +1,9 @@
 import useGeoJSONStore from '@/store';
-import mapboxgl from 'mapbox-gl';
+import { ProjectionSpecification } from 'mapbox-gl';
 
 const projections: {
   label: string;
-  value: mapboxgl.ProjectionSpecification['name'];
+  value: ProjectionSpecification['name'];
 }[] = [
   {
     label: 'Globe',

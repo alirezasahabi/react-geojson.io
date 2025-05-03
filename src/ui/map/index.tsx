@@ -40,7 +40,7 @@ const Map = () => {
       style,
       center: [20, 0],
       zoom: 2,
-      // projection,
+      projection,
       hash: 'map'
     });
 
