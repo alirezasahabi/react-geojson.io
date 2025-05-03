@@ -1,18 +1,18 @@
-import useGeoJSONStore from '@/store';
 import styles from './map/styles';
 
-const StyleSwitch = () => {
-  const activeStyle = useGeoJSONStore((s) => s.activeStyle);
-  const setActiveStyle = useGeoJSONStore((s) => s.setActiveStyle);
-
+interface Props {
+  style: string;
+  onStyleSwitch: (newStyle: string) => void;
+}
+const StyleSwitch = ({ style, onStyleSwitch }: Props) => {
   return (
     <div className="absolute left-0 bottom-0 mb-9 text-xs z-10">
       {styles.map((s) => {
-        const isActive = activeStyle === s.title;
+        const isActive = style === s.title;
 
         return (
           <button
-            onClick={() => setActiveStyle(s.title)}
+            onClick={() => onStyleSwitch(s.title)}
             className={`${
               isActive ? 'text-white bg-[#34495e]' : 'bg-white'
             } px-[5px] py-[2px] cursor-pointer`}
