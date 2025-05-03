@@ -1,4 +1,3 @@
-import useGeoJSONStore from '@/store';
 import { ProjectionSpecification } from 'mapbox-gl';
 
 const projections: {
@@ -15,18 +14,19 @@ const projections: {
   }
 ];
 
-const ProjectionSwitch = () => {
-  const projection = useGeoJSONStore((s) => s.projection);
-  const setProjection = useGeoJSONStore((s) => s.setProjection);
-
+interface Props {
+  projection: ProjectionSpecification['name'];
+  onProjectionSwitch: (newProjection: ProjectionSpecification['name']) => void;
+}
+const ProjectionSwitch = ({ projection, onProjectionSwitch }: Props) => {
   return (
-    <div className="projection-switch absolute left-0 bottom-0 mb-16 text-xs transition-all duration-200 z-10">
+    <div className="absolute left-0 bottom-0 mb-16 text-xs transition-all duration-200 z-10">
       {projections.map((p) => {
         const isActive = projection === p.value;
 
         return (
           <button
-            onClick={() => setProjection(p.value)}
+            onClick={() => onProjectionSwitch(p.value)}
             className={`${
               isActive ? 'text-white bg-[#34495e]' : 'bg-white'
             } px-[5px] py-[2px] cursor-pointer`}
