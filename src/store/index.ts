@@ -16,7 +16,10 @@ const useGeoJSONStore = create<GeoJSONStore>((set) => ({
     set({ projection });
   },
   activeStyle: DEFAULT_STYLE,
-  setActiveStyle: (activeStyle) => set({ activeStyle })
+  setActiveStyle: (activeStyle) => {
+    localStorage.setItem('style', activeStyle);
+    set({ activeStyle });
+  }
 }));
 
 export default useGeoJSONStore;
