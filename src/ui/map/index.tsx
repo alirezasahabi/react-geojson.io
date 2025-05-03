@@ -1,9 +1,17 @@
+// hooks
 import { useEffect, useRef } from 'react';
+import useGeoJSONStore from '@/store';
+//
 import mapboxgl from 'mapbox-gl';
+// components
+import ProjectionSwitch from './projection-switch';
+//
 import styles from './styles';
-import { DEFAULT_PROJECTION, DEFAULT_STYLE } from '../constants';
+import { DEFAULT_STYLE } from '../constants';
 
 const Map = () => {
+  const projection = useGeoJSONStore((s) => s.projection);
+
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map>(null);
 
@@ -20,7 +28,6 @@ const Map = () => {
       true
     );
 
-    const projection = localStorage.getItem('projection') || DEFAULT_PROJECTION;
     const activeStyle = localStorage.getItem('style') || DEFAULT_STYLE;
 
     const style = styles.find((d) => d.title === activeStyle)?.style as
@@ -33,7 +40,7 @@ const Map = () => {
       style,
       center: [20, 0],
       zoom: 2,
-      projection,
+      // projection,
       hash: 'map'
     });
 
@@ -42,8 +49,16 @@ const Map = () => {
     return () => map.remove();
   }, []);
 
+  useEffect(() => {
+    if (!mapRef.current) return;
+    mapRef.current.setProjection(projection);
+  }, [projection]);
+
   return (
-    <div ref={mapContainerRef} style={{ width: '100vw', height: '100vh' }} />
+    <>
+      <div ref={mapContainerRef} style={{ width: '100vw', height: '100vh' }} />
+      <ProjectionSwitch />
+    </>
   );
 };
 
