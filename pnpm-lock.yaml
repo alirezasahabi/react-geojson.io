@@ -33,6 +33,9 @@ importers:
       '@eslint/js':
         specifier: ^9.22.0
         version: 9.25.1
+      '@types/geojson':
+        specifier: ^7946.0.16
+        version: 7946.0.16
       '@types/mapbox__mapbox-gl-draw':
         specifier: ^1.4.8
         version: 1.4.8

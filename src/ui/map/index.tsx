@@ -3,10 +3,14 @@ import { useEffect, useRef } from 'react';
 import useGeoJSONStore from '@/store';
 //
 import mapboxgl from 'mapbox-gl';
+// draw
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import ExtendedDrawBar from '../draw/extended-draw-bar';
+import DrawLineString from '../draw/linestring';
+//
 import ProjectionSwitch from '../projection-switch';
 import StyleSwitch from '../style-switch';
+// styles
 import mapStyles from './styles';
 import drawStyles from '../draw/styles';
 
@@ -69,7 +73,7 @@ const Map = () => {
 
     const draw = new MapboxDraw({
       displayControlsDefault: false,
-      modes: { ...MapboxDraw.modes },
+      modes: { ...MapboxDraw.modes, draw_line_string: DrawLineString },
       controls: {},
       styles: drawStyles
     });
@@ -86,6 +90,16 @@ const Map = () => {
           },
           classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_point'],
           title: 'Draw Point (m)'
+        },
+        {
+          on: 'click',
+          action: () => {
+            // drawing = true;
+            // context.Draw.changeMode('draw_line_string');
+            draw.changeMode('draw_line_string');
+          },
+          classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_line'],
+          title: 'Draw LineString (l)'
         }
       ]
     });
