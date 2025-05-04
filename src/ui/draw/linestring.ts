@@ -2,6 +2,7 @@
 // of the line as the user draws using a point feature and a symbol layer
 
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
+import { getDisplayMeasurements } from './util';
 import type { Feature, Position } from 'geojson';
 
 interface LineStringState {
@@ -69,11 +70,14 @@ const ExtendedLineStringMode = {
 
     display(geojson);
 
+    const displayMeasurements = getDisplayMeasurements(geojson);
+
     // create custom feature for the current pointer position
     const currentVertex: Feature = {
       type: 'Feature',
       properties: {
         meta: 'currentPosition',
+        radius: `${displayMeasurements.metric}\n${displayMeasurements.standard}`,
         parent: lineId
       },
       geometry: {
