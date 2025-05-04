@@ -3,11 +3,12 @@ import { useEffect, useRef } from 'react';
 import useGeoJSONStore from '@/store';
 //
 import mapboxgl from 'mapbox-gl';
-// components
+import MapboxDraw from '@mapbox/mapbox-gl-draw';
+import ExtendedDrawBar from '../draw/extended-draw-bar';
 import ProjectionSwitch from '../projection-switch';
 import StyleSwitch from '../style-switch';
-//
-import styles from './styles';
+import mapStyles from './styles';
+import drawStyles from '../draw/styles';
 
 const Map = () => {
   const projection = useGeoJSONStore((s) => s.projection);
@@ -31,7 +32,7 @@ const Map = () => {
   const handleStyleSwitch = (newStyle: string) => {
     const map = mapRef.current;
     if (map) {
-      const style = styles.find((d) => d.title === newStyle)?.style as
+      const style = mapStyles.find((d) => d.title === newStyle)?.style as
         | string
         | mapboxgl.StyleSpecification;
 
@@ -53,7 +54,7 @@ const Map = () => {
       true
     );
 
-    const style = styles.find((d) => d.title === activeStyle)?.style as
+    const style = mapStyles.find((d) => d.title === activeStyle)?.style as
       | string
       | mapboxgl.StyleSpecification;
 
@@ -65,6 +66,31 @@ const Map = () => {
       projection,
       hash: 'map'
     });
+
+    const draw = new MapboxDraw({
+      displayControlsDefault: false,
+      modes: { ...MapboxDraw.modes },
+      controls: {},
+      styles: drawStyles
+    });
+
+    const drawControl = new ExtendedDrawBar({
+      draw,
+      buttons: [
+        {
+          on: 'click',
+          action: () => {
+            // drawing = true;
+            // context.Draw.changeMode('draw_point');
+            draw.changeMode('draw_point');
+          },
+          classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_point'],
+          title: 'Draw Point (m)'
+        }
+      ]
+    });
+
+    map.addControl(drawControl);
 
     mapRef.current = map;
 

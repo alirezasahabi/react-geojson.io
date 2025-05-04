@@ -1,4 +1,4 @@
-const styles: { title: string; style: any }[] = [
+const mapStyles: { title: string; style: any }[] = [
   {
     title: 'Standard',
     style: 'mapbox://styles/mapbox/standard'
@@ -46,4 +46,4 @@ const styles: { title: string; style: any }[] = [
     }
   }
 ];
-export default styles;
+export default mapStyles;
