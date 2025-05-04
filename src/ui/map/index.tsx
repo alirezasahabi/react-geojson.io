@@ -100,6 +100,16 @@ const Map = () => {
           },
           classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_line'],
           title: 'Draw LineString (l)'
+        },
+        {
+          on: 'click',
+          action: () => {
+            // drawing = true;
+            // context.Draw.changeMode('draw_polygon');
+            draw.changeMode('draw_polygon');
+          },
+          classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_polygon'],
+          title: 'Draw Polygon (p)'
         }
       ]
     });

@@ -8,3 +8,7 @@
 body {
   font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+.mapbox-gl-draw_polygon {
+  background-image: url('../../img/polygon.svg') !important;
+}
