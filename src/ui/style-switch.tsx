@@ -1,4 +1,4 @@
-import styles from './map/styles';
+import mapStyles from './map/styles';
 
 interface Props {
   style: string;
@@ -7,7 +7,7 @@ interface Props {
 const StyleSwitch = ({ style, onStyleSwitch }: Props) => {
   return (
     <div className="absolute left-0 bottom-0 mb-9 text-xs z-10">
-      {styles.map((s) => {
+      {mapStyles.map((s) => {
         const isActive = style === s.title;
 
         return (
