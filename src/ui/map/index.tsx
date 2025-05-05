@@ -7,6 +7,7 @@ import mapboxgl from 'mapbox-gl';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import ExtendedDrawBar from '../draw/extended-draw-bar';
 import DrawLineString from '../draw/linestring';
+import DrawRectangle from '../draw/rectangle';
 //
 import ProjectionSwitch from '../projection-switch';
 import StyleSwitch from '../style-switch';
@@ -73,7 +74,11 @@ const Map = () => {
 
     const draw = new MapboxDraw({
       displayControlsDefault: false,
-      modes: { ...MapboxDraw.modes, draw_line_string: DrawLineString },
+      modes: {
+        ...MapboxDraw.modes,
+        draw_line_string: DrawLineString,
+        draw_rectangle: DrawRectangle
+      },
       controls: {},
       styles: drawStyles
     });
@@ -110,6 +115,16 @@ const Map = () => {
           },
           classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_polygon'],
           title: 'Draw Polygon (p)'
+        },
+        {
+          on: 'click',
+          action: () => {
+            // drawing = true;
+            // context.Draw.changeMode('draw_rectangle');
+            draw.changeMode('draw_rectangle');
+          },
+          classes: ['mapbox-gl-draw_ctrl-draw-btn', 'mapbox-gl-draw_rectangle'],
+          title: 'Draw Rectangular Polygon (r)'
         }
       ]
     });

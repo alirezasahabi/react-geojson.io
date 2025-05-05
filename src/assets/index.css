@@ -10,5 +10,9 @@ body {
 }
 
 .mapbox-gl-draw_polygon {
-  background-image: url('../../img/polygon.svg') !important;
+  background-image: url('./icons/polygon.svg') !important;
+}
+
+.mapbox-gl-draw_rectangle {
+  background-image: url('./icons/rectangle.svg') !important;
 }
